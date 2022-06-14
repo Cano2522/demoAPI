@@ -21,7 +21,7 @@ class ListarUFTCategorias(ListAPIView):
     queryset = UFTCategorias.objects.all()
 
 class CrearCategoria(CreateAPIView):
-    serializer_class = UFTCategoriaCrearSerializer
+    serializer_class = UFTCategoriaSerializer
     queryset = UFTCategorias.objects.all()
 
 class EditarCategoria(RetrieveUpdateAPIView):
@@ -38,7 +38,7 @@ class ListarUFTNivel2(ListAPIView):
     queryset = UFTNivel2.objects.all()
 
 class CrearUFTNivel2(CreateAPIView):
-    serializer_class = UFTNivel2CrearSerializer
+    serializer_class = UFTNivel2Serializer
     queryset = UFTNivel2.objects.all()
 
 class EditarUFTNivel2(RetrieveUpdateAPIView):
@@ -55,7 +55,7 @@ class ListarUFTNivel3(ListAPIView):
     queryset = UFTNivel3.objects.all()
 
 class CrearUFTNivel3(CreateAPIView):
-    serializer_class = UFTNivel3CrearSerializer
+    serializer_class = UFTNivel3Serializer
     queryset = UFTNivel3.objects.all()
 
 class EditarUFTNivel3(RetrieveUpdateAPIView):
@@ -72,7 +72,7 @@ class ListarUFTNivel4(ListAPIView):
     queryset = UFTNivel4.objects.all()
 
 class CrearUFTNivel4(CreateAPIView):
-    serializer_class = UFTNivel4CrearSerializer
+    serializer_class = UFTNivel4Serializer
     queryset = UFTNivel4.objects.all()
 
 class EditarUFTNivel4(RetrieveUpdateAPIView):
@@ -89,7 +89,7 @@ class ListarUFTNivel5(ListAPIView):
     queryset = UFTNivel5.objects.all()
 
 class CrearUFTNivel5(CreateAPIView):
-    serializer_class = UFTNivel5CrearSerializer
+    serializer_class = UFTNivel5Serializer
     queryset = UFTNivel5.objects.all()
 
 class EditarUFTNivel5(RetrieveUpdateAPIView):

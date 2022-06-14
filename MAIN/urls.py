@@ -18,5 +18,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('UNIFORMAT.urls'))
+    path('apiUFT/', include('UNIFORMAT.urls')),
+    path('apiOMC23/', include('OMNICLAS23.urls'))
 ]

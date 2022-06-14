@@ -2,7 +2,7 @@ from django.urls import path
 from .views import * 
 
 
-app_name = 'uniformat'
+#app_name = 'uniformat'
 urlpatterns=[
     #NIVEL 1
     path('ListaUFTN1/',ListarUFTCategorias.as_view(), name='ListarUFTN1'),

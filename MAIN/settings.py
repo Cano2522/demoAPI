@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'UNIFORMAT',
+    'OMNICLAS23',
     'rest_framework',
     'rest_framework.authtoken'
 ]
@@ -79,11 +80,12 @@ WSGI_APPLICATION = 'MAIN.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'mssql',
-        'NAME':'ccdatabase1',
-        'USER': 'devedujose',
-        'PASSWORD': '6986rty/**80C',
-        'HOST': 'consultingconstructionserv.database.windows.net',  
+        'NAME': 'ccdatabase azure',
+        'USER': 'eduardo',
+        'PASSWORD': '12345',
+        'HOST': 'CC-MX-BIM-005',  
         'PORT': '',
+
         'OPTIONS': {
             'driver': 'SQL Server Native Client 11.0',
         },
@@ -133,3 +135,8 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 7000
+}
