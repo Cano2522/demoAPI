@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'UNIFORMAT',
     'OMNICLAS23',
+    'OMNICLAS41',
     'rest_framework',
     'rest_framework.authtoken'
 ]
