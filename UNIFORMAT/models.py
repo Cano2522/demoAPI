@@ -51,8 +51,8 @@ class UFTNivel4(models.Model):
     Codigo = models.CharField(max_length=10)
     descriEng = models.CharField(max_length=200)
     descriSpa = models.CharField(max_length=200, null=True, blank=True)
-    explicacionEng = models.CharField(max_length=800, null=True, blank=True)
-    explicacionSpa = models.CharField(max_length=800, null=True, blank=True)
+    explicacionEng = models.TextField(blank=True, null=True)
+    explicacionSpa = models.TextField(blank=True, null=True)
     Observaciones = models.CharField(max_length=100, null=True, blank=True)
     fk_UftN3 = models.ForeignKey(UFTNivel3, on_delete=models.CASCADE, db_column='fk_UftN3', verbose_name='Categoria Nivel 3') # con db_column se agrega el error del id
 
