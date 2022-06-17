@@ -41,8 +41,13 @@ INSTALLED_APPS = [
     'OMNICLAS23',
     'OMNICLAS41',
     'rest_framework',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
+    'drf_yasg',
 ]
+
+SWAGGER_SETTINGS = {
+    'DOC_EXPANSION': 'none'
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
