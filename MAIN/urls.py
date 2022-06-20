@@ -40,5 +40,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('apiUFT/', include('UNIFORMAT.urls')),
     path('apiOMC23/', include('OMNICLAS23.urls')),
-    path('apiOMC41/', include('OMNICLAS41.urls'))
+    path('apiOMC41/', include('OMNICLAS41.urls')),
+    path('apiOMC34/', include('OMNICLAS34.urls'))
 ]

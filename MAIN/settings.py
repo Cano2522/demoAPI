@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'UNIFORMAT',
     'OMNICLAS23',
     'OMNICLAS41',
+    'OMNICLAS34',
     'rest_framework',
     'rest_framework.authtoken',
     'drf_yasg',

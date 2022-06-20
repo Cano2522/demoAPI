@@ -25,7 +25,7 @@ class OMC41Nivel1(models.Model):
     definicionSpa = models.CharField(max_length=150, null= False)
 
     def __str__(self):
-        return f'{self.Codigo}: {self.nombreSpa}'
+        return f'{self.Codigo}: {self.descriSpa}'
 
     class Meta:
         db_table = "Omc41Nivel1"
@@ -41,7 +41,7 @@ class OMC41Nivel2(models.Model):
     fk_Omc41N1 = models.ForeignKey(OMC41Nivel1, on_delete=models.CASCADE, db_column='fk_Omc41N1', verbose_name='Nivel 1')
 
     def __str__(self):
-        return f'{self.Codigo}: {self.nombreSpa}'
+        return f'{self.Codigo}: {self.descriSpa}'
 
     class Meta:
         db_table = "Omc41Nivel2"
@@ -59,7 +59,7 @@ class OMC41Nivel3(models.Model):
     fk_Omc41N2 = models.ForeignKey(OMC41Nivel2, on_delete=models.CASCADE, db_column='fk_Omc41N2', verbose_name='Nivel 2')
 
     def __str__(self):
-        return f'{self.Codigo}: {self.nombreSpa}'
+        return f'{self.Codigo}: {self.descriSpa}'
 
     class Meta:
         db_table = "Omc41Nivel3"
@@ -77,7 +77,7 @@ class OMC41Nivel4(models.Model):
     fk_Omc41N3 = models.ForeignKey(OMC41Nivel3, on_delete=models.CASCADE, db_column='fk_Omc41N3', verbose_name='Nivel 3')
 
     def __str__(self):
-        return f'{self.Codigo}: {self.nombreSpa}'
+        return f'{self.Codigo}: {self.descriSpa}'
 
     class Meta:
         db_table = "Omc41Nivel4"
@@ -95,7 +95,7 @@ class OMC41Nivel5(models.Model):
     fk_Omc41N4 = models.ForeignKey(OMC41Nivel4, on_delete=models.CASCADE, db_column='fk_Omc41N4', verbose_name='Nivel 4')
 
     def __str__(self):
-        return f'{self.Codigo}: {self.nombreSpa}'
+        return f'{self.Codigo}: {self.descriSpa}'
 
     class Meta:
         db_table = "Omc41Nivel5"
@@ -113,7 +113,7 @@ class OMC41Nivel6(models.Model):
     fk_Omc41N5 = models.ForeignKey(OMC41Nivel5, on_delete=models.CASCADE, db_column='fk_Omc41N5', verbose_name='Nivel 5')
 
     def __str__(self):
-        return f'{self.Codigo}: {self.nombreSpa}'
+        return f'{self.Codigo}: {self.descriSpa}'
 
     class Meta:
         db_table = "Omc41Nivel6"
