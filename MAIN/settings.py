@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'OMNICLAS23',
     'OMNICLAS41',
     'OMNICLAS34',
+    'OMNICLAS35',
     'rest_framework',
     'rest_framework.authtoken',
     'drf_yasg',

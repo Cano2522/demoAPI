@@ -41,5 +41,6 @@ urlpatterns = [
     path('apiUFT/', include('UNIFORMAT.urls')),
     path('apiOMC23/', include('OMNICLAS23.urls')),
     path('apiOMC41/', include('OMNICLAS41.urls')),
-    path('apiOMC34/', include('OMNICLAS34.urls'))
+    path('apiOMC34/', include('OMNICLAS34.urls')),
+    path('apiOMC35/', include('OMNICLAS35.urls'))
 ]

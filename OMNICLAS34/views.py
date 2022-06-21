@@ -39,7 +39,7 @@ class OMC34Nivel1(viewsets.ModelViewSet):
         registro = self.get_queryset().filter(idOmc34N1=pk).first()
         if registro:
             registro.delete()
-            return Response({'message':'Registro eliminado correctamente!'}, status = status.HTTP_200_OK)
+            return Response({'mensaje':'Registro eliminado correctamente!'}, status = status.HTTP_200_OK)
         return Response({'error':'No existe un Registro con estos datos!'}, status = status.HTTP_400_BAD_REQUEST)
 
 # TABLA OMNICLAS 34 Nivel 2
@@ -76,7 +76,7 @@ class OMC34Nivel2(viewsets.ModelViewSet):
         registro = self.get_queryset().filter(idOmc34N2=pk).first()
         if registro:
             registro.delete()
-            return Response({'message':'Registro eliminado correctamente!'}, status = status.HTTP_200_OK)
+            return Response({'mensaje':'Registro eliminado correctamente!'}, status = status.HTTP_200_OK)
         return Response({'error':'No existe un Registro con estos datos!'}, status = status.HTTP_400_BAD_REQUEST)
 
 # TABLA OMNICLAS 34 Nivel 3
@@ -113,7 +113,7 @@ class OMC34Nivel3(viewsets.ModelViewSet):
         registro = self.get_queryset().filter(idOmc34N3=pk).first()
         if registro:
             registro.delete()
-            return Response({'message':'Registro eliminado correctamente!'}, status = status.HTTP_200_OK)
+            return Response({'mensaje':'Registro eliminado correctamente!'}, status = status.HTTP_200_OK)
         return Response({'error':'No existe un Registro con estos datos!'}, status = status.HTTP_400_BAD_REQUEST)
 
 # TABLA OMNICLAS 34 Nivel 4
@@ -150,5 +150,5 @@ class OMC34Nivel4(viewsets.ModelViewSet):
         registro = self.get_queryset().filter(idOmc34N4=pk).first()
         if registro:
             registro.delete()
-            return Response({'message':'Registro eliminado correctamente!'}, status = status.HTTP_200_OK)
+            return Response({'mensaje':'Registro eliminado correctamente!'}, status = status.HTTP_200_OK)
         return Response({'error':'No existe un Registro con estos datos!'}, status = status.HTTP_400_BAD_REQUEST)
