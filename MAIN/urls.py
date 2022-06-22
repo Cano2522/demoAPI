@@ -43,5 +43,6 @@ urlpatterns = [
     path('apiOMC41/', include('OMNICLAS41.urls')),
     path('apiOMC34/', include('OMNICLAS34.urls')),
     path('apiOMC35/', include('OMNICLAS35.urls')),
+    path('apiMateriales/', include('MATERIALES.urls')),
     path('apiRolesOrg/', include('ROLESORG.urls'))
 ]

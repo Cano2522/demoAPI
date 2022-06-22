@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import *
+from OMNICLAS23.views import *
 
 app_name = 'omniclas23'
 urlpatterns = [

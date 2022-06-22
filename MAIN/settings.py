@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'OMNICLAS41',
     'OMNICLAS34',
     'OMNICLAS35',
+    'MATERIALES',
     'ROLESORG',
     'rest_framework',
     'rest_framework.authtoken',
