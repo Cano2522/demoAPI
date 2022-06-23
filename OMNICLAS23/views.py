@@ -57,7 +57,7 @@ class CrearOMC23Nivel1(CreateAPIView):
     serializer_class = OMC23Nivel1Serializer
     #permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
-class EditarOMC23Nivel1(UpdateAPIView):
+class EditarOMC23Nivel1(RetrieveUpdateAPIView):
     queryset = OMC23Nivel1.objects.all()
     serializer_class = OMC23Nivel1Serializer
     #permission_classes = [permissions.IsAuthenticatedOrReadOnly]
