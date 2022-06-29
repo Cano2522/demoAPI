@@ -4,8 +4,8 @@ from django.urls import path, include
 from MATERIALES.views import * 
 
 router = routers.DefaultRouter()
-router.register('users', UserViewSet)
-router.register('groups', GroupViewSet)
+# router.register('users', UserViewSet)
+# router.register('groups', GroupViewSet)
 
 #MATERIALES
 # router.register('CrearMaterial/', CrearMaterial)

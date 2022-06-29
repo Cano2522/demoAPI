@@ -30,13 +30,17 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-INSTALLED_APPS = [
+BASE_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+]
+
+LOCAL_APPS = [
+    'usuarios',
     'UNIFORMAT',
     'OMNICLAS23',
     'OMNICLAS41',
@@ -44,16 +48,24 @@ INSTALLED_APPS = [
     'OMNICLAS35',
     'MATERIALES',
     'ROLESORG',
+]
+
+THIRD_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
+    'simple_history',
     'drf_yasg',
+    "corsheaders",
 ]
+
+INSTALLED_APPS = BASE_APPS + LOCAL_APPS + THIRD_APPS
 
 SWAGGER_SETTINGS = {
     'DOC_EXPANSION': 'none'
 }
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -61,6 +73,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'simple_history.middleware.HistoryRequestMiddleware',
 ]
 
 ROOT_URLCONF = 'MAIN.urls'
@@ -127,13 +140,23 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'es'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Mexico_City'
 
 USE_I18N = True
 
 USE_L10N = True
 
 USE_TZ = True
+
+AUTH_USER_MODEL = 'usuarios.User'
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000"
+]
+
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:3000"
+]
 
 
 # Static files (CSS, JavaScript, Images)

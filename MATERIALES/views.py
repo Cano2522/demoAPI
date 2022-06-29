@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User, Group
+# from django.contrib.auth.models import User, Group
 from django.db import connection
 from MATERIALES.serializers import *
 from MATERIALES.models import *
@@ -16,22 +16,22 @@ from rest_framework.generics import (
     RetrieveUpdateAPIView,
 )
 
-class UserViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows users to be viewed or edited.
-    """
-    queryset = User.objects.all().order_by('-date_joined')
-    serializer_class = UserSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+# class UserViewSet(viewsets.ModelViewSet):
+#     """
+#     API endpoint that allows users to be viewed or edited.
+#     """
+#     queryset = User.objects.all().order_by('-date_joined')
+#     serializer_class = UserSerializer
+#     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
-class GroupViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows groups to be viewed or edited.
-    """
-    queryset = Group.objects.all()
-    serializer_class = GroupSerializer
-    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+# class GroupViewSet(viewsets.ModelViewSet):
+#     """
+#     API endpoint that allows groups to be viewed or edited.
+#     """
+#     queryset = Group.objects.all()
+#     serializer_class = GroupSerializer
+#     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 #VISTAS PARA MATERIALES
 
