@@ -2,10 +2,11 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import status
+from usuarios.authentication_mixins import Authentication
 from ROLESORG.serializers import *
 
 # Create your views here.
-class RolesOrg(viewsets.ModelViewSet):
+class RolesOrg(Authentication,viewsets.ModelViewSet):
     serializer_class = RolesOrgSerializer
 
     def get_queryset(self, pk=None):

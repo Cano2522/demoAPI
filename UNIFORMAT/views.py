@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .serializers import *
 from .models import *
+from usuarios.authentication_mixins import Authentication
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.authtoken.models import Token
@@ -17,19 +18,19 @@ from rest_framework.generics import (
 # Create your views here.
 
 #CRUD DEL NIVEL 1 DE UNIFORMAT
-class ListarUFTCategorias(ListAPIView):
+class ListarUFTCategorias(Authentication,ListAPIView):
     serializer_class = UFTCategoriaSerializer
     queryset = UFTCategorias.objects.all()
 
-class CrearCategoria(CreateAPIView):
+class CrearCategoria(Authentication,CreateAPIView):
     serializer_class = UFTCategoriaSerializer
     #queryset = UFTCategorias.objects.all()
 
-class EditarCategoria(RetrieveUpdateAPIView):
+class EditarCategoria(Authentication,RetrieveUpdateAPIView):
     serializer_class = UFTCategoriaSerializer
     queryset = UFTCategorias.objects.all()
 
-class EliminarCatgoria(DestroyAPIView): #para eliminar no es requerido enviar todo el json, sino con el puro id (llave primaria)
+class EliminarCatgoria(Authentication,DestroyAPIView): #para eliminar no es requerido enviar todo el json, sino con el puro id (llave primaria)
     serializer_class = UFTCategoriaSerializer
     # queryset = UFTCategorias.objects.all()
     def get_queryset(self):
@@ -43,19 +44,19 @@ class EliminarCatgoria(DestroyAPIView): #para eliminar no es requerido enviar to
         return Response({'error': 'No existe un registro con estos datos!'}, status = status.HTTP_400_BAD_REQUEST)
 
 #CRUD DEL NIVEL 2 DE UNIFORMAT
-class ListarUFTNivel2(ListAPIView):
+class ListarUFTNivel2(Authentication,ListAPIView):
     serializer_class = UFTNivel2Serializer
     queryset = UFTNivel2.objects.all()
 
-class CrearUFTNivel2(CreateAPIView):
+class CrearUFTNivel2(Authentication,CreateAPIView):
     serializer_class = UFTNivel2Serializer
     # queryset = UFTNivel2.objects.all()
 
-class EditarUFTNivel2(RetrieveUpdateAPIView):
+class EditarUFTNivel2(Authentication,RetrieveUpdateAPIView):
     serializer_class = UFTNivel2Serializer
     queryset = UFTNivel2.objects.all()
 
-class EliminarUFTNivel2(DestroyAPIView): #para eliminar no es requerido enviar todo el json, sino con el puro id (llave primaria)
+class EliminarUFTNivel2(Authentication,DestroyAPIView): #para eliminar no es requerido enviar todo el json, sino con el puro id (llave primaria)
     serializer_class = UFTNivel2Serializer
     # queryset = UFTNivel2.objects.all()
     def get_queryset(self):
@@ -69,19 +70,19 @@ class EliminarUFTNivel2(DestroyAPIView): #para eliminar no es requerido enviar t
         return Response({'error': 'No existe un registro con estos datos!'}, status = status.HTTP_400_BAD_REQUEST)
 
 #CRUD DEL NIVEL 3 DE UNIFORMAT
-class ListarUFTNivel3(ListAPIView):
+class ListarUFTNivel3(Authentication,ListAPIView):
     serializer_class = UFTNivel3Serializer
     queryset = UFTNivel3.objects.all()
 
-class CrearUFTNivel3(CreateAPIView):
+class CrearUFTNivel3(Authentication,CreateAPIView):
     serializer_class = UFTNivel3Serializer
     # queryset = UFTNivel3.objects.all()
 
-class EditarUFTNivel3(RetrieveUpdateAPIView):
+class EditarUFTNivel3(Authentication,RetrieveUpdateAPIView):
     serializer_class = UFTNivel3Serializer
     queryset = UFTNivel3.objects.all()
 
-class EliminarUFTNivel3(DestroyAPIView): #para eliminar no es requerido enviar todo el json, sino con el puro id (llave primaria)
+class EliminarUFTNivel3(Authentication,DestroyAPIView): #para eliminar no es requerido enviar todo el json, sino con el puro id (llave primaria)
     serializer_class = UFTNivel3Serializer
     #queryset = UFTNivel3.objects.all()
     def get_queryset(self):
@@ -95,19 +96,19 @@ class EliminarUFTNivel3(DestroyAPIView): #para eliminar no es requerido enviar t
         return Response({'error': 'No existe un registro con estos datos!'}, status = status.HTTP_400_BAD_REQUEST)
 
 #CRUD DEL NIVEL 4 DE UNIFORMAT
-class ListarUFTNivel4(ListAPIView):
+class ListarUFTNivel4(Authentication,ListAPIView):
     serializer_class = UFTNivel4Serializer
     queryset = UFTNivel4.objects.all()
 
-class CrearUFTNivel4(CreateAPIView):
+class CrearUFTNivel4(Authentication,CreateAPIView):
     serializer_class = UFTNivel4Serializer
     # queryset = UFTNivel4.objects.all()
 
-class EditarUFTNivel4(RetrieveUpdateAPIView):
+class EditarUFTNivel4(Authentication,RetrieveUpdateAPIView):
     serializer_class = UFTNivel4Serializer
     queryset = UFTNivel4.objects.all()
 
-class EliminarUFTNivel4(DestroyAPIView): #para eliminar no es requerido enviar todo el json, sino con el puro id (llave primaria)
+class EliminarUFTNivel4(Authentication,DestroyAPIView): #para eliminar no es requerido enviar todo el json, sino con el puro id (llave primaria)
     serializer_class = UFTNivel4Serializer
     # queryset = UFTNivel4.objects.all()
     def get_queryset(self):
@@ -121,19 +122,19 @@ class EliminarUFTNivel4(DestroyAPIView): #para eliminar no es requerido enviar t
         return Response({'error': 'No existe un registro con estos datos!'}, status = status.HTTP_400_BAD_REQUEST)
 
 #CRUD DEL NIVEL 5 DE UNIFORMAT
-class ListarUFTNivel5(ListAPIView):
+class ListarUFTNivel5(Authentication,ListAPIView):
     serializer_class = UFTNivel5Serializer
     queryset = UFTNivel5.objects.all()
 
-class CrearUFTNivel5(CreateAPIView):
+class CrearUFTNivel5(Authentication,CreateAPIView):
     serializer_class = UFTNivel5Serializer
     # queryset = UFTNivel5.objects.all()
 
-class EditarUFTNivel5(RetrieveUpdateAPIView):
+class EditarUFTNivel5(Authentication,RetrieveUpdateAPIView):
     serializer_class = UFTNivel5Serializer
     queryset = UFTNivel5.objects.all()
 
-class EliminarUFTNivel5(DestroyAPIView): #para eliminar no es requerido enviar todo el json, sino con el puro id (llave primaria)
+class EliminarUFTNivel5(Authentication,DestroyAPIView): #para eliminar no es requerido enviar todo el json, sino con el puro id (llave primaria)
     serializer_class = UFTNivel5Serializer
     # queryset = UFTNivel5.objects.all()
     def get_queryset(self):

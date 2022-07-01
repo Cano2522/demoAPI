@@ -1,14 +1,14 @@
 from django.db import router
-from rest_framework import routers
+from rest_framework.routers import DefaultRouter
 from django.urls import path, include
 from MATERIALES.views import * 
 
-router = routers.DefaultRouter()
+router = DefaultRouter()
 # router.register('users', UserViewSet)
 # router.register('groups', GroupViewSet)
 
 #MATERIALES
-# router.register('CrearMaterial/', CrearMaterial)
+router.register('ListarConcretosMateriales', ListarConcretosMateriales, basename = 'ListarConcretosMateriales')
 # router.register('CrearConcreto/', CrearConcreto)
 # router.register('CrearCaracEspe/', CrearCaracEspe)
 #router.register('Materiales/', MostrarMateriales)
@@ -34,7 +34,7 @@ urlpatterns=[
     path('ListarUnidadesMedida/', ListarUnidadesMedida.as_view(), name='ListarUnidadesMedida'),
     path('ListarMateriales/', ListarMateriales.as_view(), name='ListarMateriales'),
     path('ListarConcreto/', ListarConcreto.as_view(), name='ListarConcreto'),
-    path('ListarConcretosMateriales/', ListarConcretosMateriales, name='ListarConcretosMateriales'),
+    # path('ListarConcretosMateriales/', ListarConcretosMateriales, name='ListarConcretosMateriales'),
 
 ]
 

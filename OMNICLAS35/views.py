@@ -2,11 +2,12 @@ from django.shortcuts import render
 from rest_framework import status
 from rest_framework import viewsets
 from rest_framework.response import Response
+from usuarios.authentication_mixins import Authentication
 from OMNICLAS35.serializers import *
 # Create your views here.
 
 #TABLAS OMNICLAS 35 NIVEL 1
-class OMC35Nivel1(viewsets.ModelViewSet):
+class OMC35Nivel1(Authentication,viewsets.ModelViewSet):
     serializer_class = OMC35Nivel1Serializer
 
     def get_queryset(self, pk=None):
@@ -39,7 +40,7 @@ class OMC35Nivel1(viewsets.ModelViewSet):
         return Response({'error':'No existe un Registro con estos datos!'}, status = status.HTTP_400_BAD_REQUEST)
 
 #TABLAS OMNICLAS 35 NIVEL 2
-class OMC35Nivel2(viewsets.ModelViewSet):
+class OMC35Nivel2(Authentication,viewsets.ModelViewSet):
     serializer_class = OMC35Nivel2Serializer
 
     def get_queryset(self, pk=None):
@@ -72,7 +73,7 @@ class OMC35Nivel2(viewsets.ModelViewSet):
         return Response({'error':'No existe un Registro con estos datos!'}, status = status.HTTP_400_BAD_REQUEST)
 
 #TABLAS OMNICLAS 35 NIVEL 3
-class OMC35Nivel3(viewsets.ModelViewSet):
+class OMC35Nivel3(Authentication,viewsets.ModelViewSet):
     serializer_class = OMC35Nivel3Serializer
 
     def get_queryset(self, pk=None):
@@ -105,7 +106,7 @@ class OMC35Nivel3(viewsets.ModelViewSet):
         return Response({'error':'No existe un Registro con estos datos!'}, status = status.HTTP_400_BAD_REQUEST)
 
 #TABLAS OMNICLAS 35 NIVEL 4
-class OMC35Nivel4(viewsets.ModelViewSet):
+class OMC35Nivel4(Authentication,viewsets.ModelViewSet):
     serializer_class = OMC35Nivel4Serializer
 
     def get_queryset(self, pk=None):
@@ -138,7 +139,7 @@ class OMC35Nivel4(viewsets.ModelViewSet):
         return Response({'error':'No existe un Registro con estos datos!'}, status = status.HTTP_400_BAD_REQUEST)
 
 #TABLAS OMNICLAS 35 NIVEL 5
-class OMC35Nivel5(viewsets.ModelViewSet):
+class OMC35Nivel5(Authentication,viewsets.ModelViewSet):
     serializer_class = OMC35Nivel5Serializer
 
     def get_queryset(self, pk=None):
@@ -171,7 +172,7 @@ class OMC35Nivel5(viewsets.ModelViewSet):
         return Response({'error':'No existe un Registro con estos datos!'}, status = status.HTTP_400_BAD_REQUEST)
 
 #TABLAS OMNICLAS 35 NIVEL 6
-class OMC35Nivel6(viewsets.ModelViewSet):
+class OMC35Nivel6(Authentication,viewsets.ModelViewSet):
     serializer_class = OMC35Nivel6Serializer
 
     def get_queryset(self, pk=None):

@@ -3,10 +3,11 @@ from rest_framework import generics
 from rest_framework import status
 from rest_framework import viewsets
 from rest_framework.response import Response
+from usuarios.authentication_mixins import Authentication
 from OMNICLAS34.serializers import *
 
 # Create your views here.
-class OMC34Nivel1(viewsets.ModelViewSet):
+class OMC34Nivel1(Authentication,viewsets.ModelViewSet):
     serializer_class = OMC34Nivel1Serializer
 
     def get_queryset(self, pk=None):
@@ -43,7 +44,7 @@ class OMC34Nivel1(viewsets.ModelViewSet):
         return Response({'error':'No existe un Registro con estos datos!'}, status = status.HTTP_400_BAD_REQUEST)
 
 # TABLA OMNICLAS 34 Nivel 2
-class OMC34Nivel2(viewsets.ModelViewSet):
+class OMC34Nivel2(Authentication,viewsets.ModelViewSet):
     serializer_class = OMC34Nivel2Serializer
 
     def get_queryset(self, pk=None):
@@ -80,7 +81,7 @@ class OMC34Nivel2(viewsets.ModelViewSet):
         return Response({'error':'No existe un Registro con estos datos!'}, status = status.HTTP_400_BAD_REQUEST)
 
 # TABLA OMNICLAS 34 Nivel 3
-class OMC34Nivel3(viewsets.ModelViewSet):
+class OMC34Nivel3(Authentication,viewsets.ModelViewSet):
     serializer_class = OMC34Nivel3Serializer
 
     def get_queryset(self, pk=None):
@@ -117,7 +118,7 @@ class OMC34Nivel3(viewsets.ModelViewSet):
         return Response({'error':'No existe un Registro con estos datos!'}, status = status.HTTP_400_BAD_REQUEST)
 
 # TABLA OMNICLAS 34 Nivel 4
-class OMC34Nivel4(viewsets.ModelViewSet):
+class OMC34Nivel4(Authentication,viewsets.ModelViewSet):
     serializer_class = OMC34Nivel4Serializer
 
     def get_queryset(self, pk=None):

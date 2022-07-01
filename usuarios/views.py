@@ -1,9 +1,89 @@
+from datetime import datetime
+from django.contrib.sessions.models import Session
 from rest_framework import status
+from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import viewsets
+from rest_framework.authtoken.models import Token
+from rest_framework.authtoken.views import ObtainAuthToken
+from usuarios.authentication_mixins import Authentication
 from usuarios.models import User
 from usuarios.serializers import *
+#VISTAT PARA EL CONTRO DEL LOGEO Y EL MANEJO DE TOKENS
+class UserToken(Authentication, APIView):
+    def get(self,request,*args,**kwargs):
+        #username = request.GET.get('username')
+        try:
+            user_token,_ = Token.objects.get_or_create(user = self.user)
+            user = UserTokenSerializer(self.user)
+            return Response({'token': user_token.key, 'user': user.data})
+        except:
+            return Response({'error':'Credenciales enviadas incorrectas.'}, status = status.HTTP_400_BAD_REQUEST)
+
+class Login(ObtainAuthToken):
+    def post(self, request, *args, **kwargs):
+        login_serializer = self.serializer_class(data=request.data, context = {'request':request})
+        if login_serializer.is_valid():
+            user = login_serializer.validated_data['user']
+            if user.is_active:
+                token,created = Token.objects.get_or_create(user = user)
+                user.las_login = datetime.now()
+                user.save()
+                user_serializer = UserTokenSerializer(user)
+                if created:
+                    return Response({
+                        'token': token.key,
+                        'user': user_serializer.data,
+                        'mensaje': 'Inicio de Sesión Exitoso.'
+                    }, status = status.HTTP_201_CREATED)
+                else:
+                    all_sessions = Session.objects.filet(expire_date__gte = datetime.now())
+                    if all_sessions.exists():
+                        for session in all_sessions:
+                            session_data = session.get_decoded()
+                            if user.id == int(session_data.get('_auth_user_id')):
+                                session.delete()
+                    token.delete()
+                    token = Token.objects.create(user = user)
+                    return Response({
+                        'token': token.key,
+                        'user': user_serializer.data,
+                        'message': 'Inicio de Sesión Exitoso'
+                    }, status = status.HTTP_201_CREATED)
+                    # token.delete()
+                    # return Response({
+                    #     'error': 'Ya se ha iniciado sesión con este usuario.'
+                    # }, status = status.HTTP_409_CONFLICT)
+            else:
+                return Response({'error','Este usuario no puede iniciar sesión'}, status = status.HTTP_401_UNAUTHORIZED)
+        else:
+            return Response({'error':'Nombre de usuario o contraseña incorrectos.'}, status = status.HTTP_400_BAD_REQUEST)
+
+class Logout(APIView):
+    def post(self, request, *args, **kwargs):
+        try:
+            # token = request.POST.get('token')
+            token = request.data['token']
+            #print(token)
+            token = Token.objects.filter(key = token).first()
+            if token:
+                user = token.user
+
+                all_sessions = Session.objects.filter(expire_date__gte = datetime.now())
+                if all_sessions.exists():
+                    for session in all_sessions:
+                        session_data = session.get_decoded()
+                        if user.id == int(session_data.get('_auth_user_id')):
+                            session.delete()
+                token.delete()
+
+                session_message = 'Sessiones de usuario eliminadas.'
+                token_message = 'Token eliminado.'
+                return Response({'mensaje_token':token_message, 'mensaje_sesion':session_message}, status = status.HTTP_200_OK)
+            return Response({'error': 'No se ha encontrado un usuario con estas credenciales'}, status = status.HTTP_400_BAD_REQUEST)
+        except:
+            return Response({'error':'No se han encontrado token en la petición'}, status = status.HTTP_409_CONFLICT)
 
 #VISTAS PARA EL CONTROL DE LA TABLA "User" que es la principal para el logeo y manejo de tokens
 # Create your views here.
@@ -20,9 +100,9 @@ def VistaUsuario(request):
 
         if usuario_serializer.is_valid():
             usuario_serializer.save()
-            return Response({'mensaje':'Usuario creado correctamente!'}, status = status.HTTP_201_CREATED)
+            return Response(usuario_serializer.data, status = status.HTTP_201_CREATED)
         
-        return Response(usuario_serializer.errors)
+        return Response(usuario_serializer.errors,status = status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET','PUT','DELETE'])
 def VistaUsuarioDetalle(request,pk=None):
@@ -49,7 +129,7 @@ def VistaUsuarioDetalle(request,pk=None):
 
 #VISTAS PARA EL CONTROL DE LAS TABLAS SECUNDARIAS DE USUARIOS
 
-class VistaEmpleado(viewsets.ModelViewSet):
+class VistaEmpleado(Authentication,viewsets.ModelViewSet):
     serializer_class = EmpleadoSerializer
     def get_queryset(self, pk=None):
         if pk is None:
@@ -80,7 +160,7 @@ class VistaEmpleado(viewsets.ModelViewSet):
             return Response({'mensaje':'Registro eliminado correctamente!'}, status = status.HTTP_200_OK)
         return Response({'error':'No existe un Registro con estos datos!'}, status = status.HTTP_400_BAD_REQUEST)
 
-class VistaDatosLaborales(viewsets.ModelViewSet):
+class VistaDatosLaborales(Authentication,viewsets.ModelViewSet):
     serializer_class = DatosLaboralesSerializer
     def get_queryset(self, pk=None):
         if pk is None:
@@ -113,7 +193,7 @@ class VistaDatosLaborales(viewsets.ModelViewSet):
 
 #VISTAS PARA EL CONTROL DE LAS TABLAS EXTRAS DE USUARIOS
 
-class VistaCP(viewsets.ModelViewSet):
+class VistaCP(Authentication,viewsets.ModelViewSet):
     serializer_class = CPSerializer
     def get_queryset(self, pk=None):
         if pk is None:
@@ -121,7 +201,31 @@ class VistaCP(viewsets.ModelViewSet):
         else:
             return self.get_serializer().Meta.model.objects.filter(cp = pk).first()
 
-class VistaCargo(viewsets.ModelViewSet):
+class VistaMunDeleg(Authentication,viewsets.ModelViewSet):
+    serializer_class = MunicipioSerializer
+    def get_queryset(self, pk=None):
+        if pk is None:
+            return self.get_serializer().Meta.model.objects.all()
+        else:
+            return self.get_serializer().Meta.model.objects.filter(idMunDeleg = pk).first()
+
+class VistaEstado(Authentication,viewsets.ModelViewSet):
+    serializer_class = EstadoSerializer
+    def get_queryset(self, pk=None):
+        if pk is None:
+            return self.get_serializer().Meta.model.objects.all()
+        else:
+            return self.get_serializer().Meta.model.objects.filter(idEstado = pk).first()
+
+class VistaPais(Authentication,viewsets.ModelViewSet):
+    serializer_class = PaisSerializer
+    def get_queryset(self, pk=None):
+        if pk is None:
+            return self.get_serializer().Meta.model.objects.all()
+        else:
+            return self.get_serializer().Meta.model.objects.filter(idPais = pk).first()
+
+class VistaCargo(Authentication,viewsets.ModelViewSet):
     serializer_class = CargoSerializer
     def get_queryset(self, pk=None):
         if pk is None:
@@ -129,7 +233,7 @@ class VistaCargo(viewsets.ModelViewSet):
         else:
             return self.get_serializer().Meta.model.objects.filter(idCargo = pk).first()
 
-class VistaDepartamento(viewsets.ModelViewSet):
+class VistaDepartamento(Authentication,viewsets.ModelViewSet):
     serializer_class = DepartamentoSerializer
     def get_queryset(self, pk=None):
         if pk is None:
@@ -137,11 +241,13 @@ class VistaDepartamento(viewsets.ModelViewSet):
         else:
             return self.get_serializer().Meta.model.objects.filter(idDepto = pk).first()
 
-class VistaContrato(viewsets.ModelViewSet):
+class VistaContrato(Authentication,viewsets.ModelViewSet):
     serializer_class = ContratoSerializer
     def get_queryset(self, pk=None):
         if pk is None:
             return self.get_serializer().Meta.model.objects.all()
         else:
             return self.get_serializer().Meta.model.objects.filter(idContrato = pk).first()
+
+
 
