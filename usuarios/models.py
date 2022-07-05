@@ -2,6 +2,7 @@ from tkinter.tix import Balloon
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from simple_history.models import HistoricalRecords
+from DATOSGEOGRAFICOS.models import CP
 # Create your models here.
 
 #MODELOS PRINCIPALES PARA EL MANEJO DE USUARIOS
@@ -60,52 +61,6 @@ class User(AbstractBaseUser, PermissionsMixin):
         return f'{self.Nombre} {self.Apellidos}'
 
 #MODELOS EXTRAS PARA CUBRIR LLAVES FORANEAS DE OTROS MODELOS
-class Pais(models.Model):
-    idPais = models.BigAutoField(auto_created=True, primary_key= True, serialize= False, verbose_name='idPais')
-    Nombre = models.CharField(max_length=45, null=False)  
-    ISO = models.CharField(max_length=2, null = False)
-    codNumIso = models.IntegerField(blank=True, null=True)
-    formDirec = models.CharField(max_length=80, blank=True, null=True)
-
-    def __str__(self):
-        return f'{self.Nombre}'
-
-    class Meta:
-        db_table = 'Pais'
-
-class Estado(models.Model):
-    idEstado = models.BigAutoField(auto_created=True, primary_key= True, serialize= False, verbose_name='idEstado')
-    Nombre = models.CharField(max_length=25, null=False)  
-    ISO = models.CharField(max_length=4,blank=True, null=True) 
-    fk_Pais = models.ForeignKey(Pais,on_delete=models.CASCADE, db_column='fk_Pais', verbose_name='País')
-
-    def __str__(self):
-        return f'{self.Nombre}'
-
-    class Meta:
-        db_table = 'Estado'
-
-class Mundeleg(models.Model):
-    idMunDeleg = models.BigAutoField(auto_created=True, primary_key= True, serialize= False, verbose_name='idMunDeleg')
-    Nombre = models.CharField(max_length=45, null=False)  
-    fk_Estado = models.ForeignKey(Estado,on_delete=models.CASCADE, db_column='fk_Estado', verbose_name='Estado')
-
-    def __str__(self):
-        return f'{self.Nombre}'
-
-    class Meta:
-        db_table = 'MunDeleg'
-
-class CP(models.Model): 
-    cp = models.BigAutoField(auto_created=True, primary_key= True, serialize= False, verbose_name='cp')
-    fk_MpioDel = models.ForeignKey(Mundeleg,on_delete=models.CASCADE, db_column='fk_MpioDel', verbose_name='Municipio')
-
-    def __str__(self):
-        return f'{self.cp}'
-
-    class Meta:
-        db_table = 'CP'
-
 class Departamento(models.Model): 
     idDepto = models.BigAutoField(auto_created=True, primary_key= True, serialize= False, verbose_name='idDepto')
     Nombre = models.CharField(max_length=45, null=False)  
@@ -151,7 +106,7 @@ class Empleado(models.Model):
     noInt = models.IntegerField(blank=True, null=True)
     noExt = models.IntegerField(blank=True, null=True)
     fk_User = models.ForeignKey(User,on_delete=models.CASCADE, db_column='fk_User', verbose_name='Usuario')
-    fk_CP = models.ForeignKey(CP,on_delete=models.CASCADE, db_column='fk_CP', verbose_name='Código Postal')
+    fk_CP = models.ForeignKey(CP,on_delete=models.CASCADE, blank=True, null=True, db_column='fk_CP', verbose_name='Código Postal')
 
     def __str__(self):
         return f'{self.CURP}'

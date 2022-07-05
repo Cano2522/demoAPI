@@ -47,6 +47,7 @@ class OMC23Nivel2(models.Model):
     ejemploSpa = models.CharField(max_length=400, blank= True, null= True)
     regFinal = models.BooleanField(null= False)
     anioReg = models.IntegerField(null= False)
+    regUsuario = models.BooleanField(blank=True,null= True)
     fk_Omc23N1 = models.ForeignKey(OMC23Nivel1, on_delete=models.CASCADE, db_column='fk_Omc23N1', verbose_name='Nivel 1')
 
     def __str__(self):
@@ -67,6 +68,7 @@ class OMC23Nivel3(models.Model):
     ejemploSpa = models.CharField(max_length=300, blank= True, null= True)
     anioReg = models.IntegerField(null= False)
     regFinal = models.BooleanField(null= False)
+    regUsuario = models.BooleanField(blank=True,null= True)
     fk_Omc23N2 = models.ForeignKey(OMC23Nivel2, on_delete=models.CASCADE, db_column='fk_Omc23N2', verbose_name='Nivel 2')
 
     def __str__(self):
@@ -87,6 +89,7 @@ class OMC23Nivel4(models.Model):
     ejemploSpa = models.CharField(max_length=300, blank= True, null= True)
     anioReg = models.IntegerField(null= False)
     regFinal = models.BooleanField(null= False)
+    regUsuario = models.BooleanField(blank=True,null= True)
     fk_Omc23N3 = models.ForeignKey(OMC23Nivel3, on_delete=models.CASCADE, db_column='fk_Omc23N3', verbose_name='Nivel 3')
 
     def __str__(self):
@@ -107,6 +110,7 @@ class OMC23Nivel5(models.Model):
     ejemploSpa = models.CharField(max_length=150, blank= True, null= True)
     anioReg = models.IntegerField(null= False)
     regFinal = models.BooleanField(null= False)
+    regUsuario = models.BooleanField(blank=True,null= True)
     fk_Omc23N4 = models.ForeignKey(OMC23Nivel4, on_delete=models.CASCADE, db_column='fk_Omc23N4', verbose_name='Nivel 4')
 
     def __str__(self):
@@ -127,6 +131,7 @@ class OMC23Nivel6(models.Model):
     ejemploSpa = models.CharField(max_length=150, blank= True, null= True)
     anioReg = models.IntegerField(null= False)
     regFinal = models.BooleanField(null= False)
+    regUsuario = models.BooleanField(blank=True,null= True)
     fk_Omc23N5 = models.ForeignKey(OMC23Nivel5, on_delete=models.CASCADE, db_column='fk_Omc23N5', verbose_name='Nivel 5')
 
     def __str__(self):

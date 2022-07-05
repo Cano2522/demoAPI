@@ -27,7 +27,7 @@ class UsuarioSerializer(serializers.ModelSerializer):
 class EditarUsuarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('username','Correo','Nombre','Apellidos','Genero','Rol')
+        fields = ('id','username','Correo','Nombre','Apellidos','Genero','Rol')
 
 class ListarUsuarioSerializer(serializers.ModelSerializer):
     class Meta:
@@ -59,26 +59,6 @@ class DatosLaboralesSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 # SERIALIZERS PARA MANEJAR TABLAS EXTRAS DE USUARIOS
-class PaisSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Pais
-        fields = '__all__'
-
-class EstadoSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Estado
-        fields = '__all__'
-
-class MunicipioSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Mundeleg
-        fields = '__all__'
-
-class CPSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = CP
-        fields = '__all__'
-
 class DepartamentoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Departamento

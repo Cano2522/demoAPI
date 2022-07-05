@@ -175,8 +175,6 @@ class UsuarioViewSet(Authentication,viewsets.GenericViewSet):
             return Response({'mensaje':'Usuario eliminado correctamente!'}, status = status.HTTP_200_OK)
         return Response({'mensaje':'No se a encontrado un usuario con estos datos'}, status = status.HTTP_404_NOT_FOUND)
 
-
-
 #VISTAS PARA EL CONTROL DE LAS TABLAS SECUNDARIAS DE USUARIOS
 
 class VistaEmpleado(Authentication,viewsets.ModelViewSet):
@@ -242,39 +240,6 @@ class VistaDatosLaborales(Authentication,viewsets.ModelViewSet):
         return Response({'error':'No existe un Registro con estos datos!'}, status = status.HTTP_400_BAD_REQUEST)
 
 #VISTAS PARA EL CONTROL DE LAS TABLAS EXTRAS DE USUARIOS
-
-class VistaCP(Authentication,viewsets.ModelViewSet):
-    serializer_class = CPSerializer
-    def get_queryset(self, pk=None):
-        if pk is None:
-            return self.get_serializer().Meta.model.objects.all()
-        else:
-            return self.get_serializer().Meta.model.objects.filter(cp = pk).first()
-
-class VistaMunDeleg(Authentication,viewsets.ModelViewSet):
-    serializer_class = MunicipioSerializer
-    def get_queryset(self, pk=None):
-        if pk is None:
-            return self.get_serializer().Meta.model.objects.all()
-        else:
-            return self.get_serializer().Meta.model.objects.filter(idMunDeleg = pk).first()
-
-class VistaEstado(Authentication,viewsets.ModelViewSet):
-    serializer_class = EstadoSerializer
-    def get_queryset(self, pk=None):
-        if pk is None:
-            return self.get_serializer().Meta.model.objects.all()
-        else:
-            return self.get_serializer().Meta.model.objects.filter(idEstado = pk).first()
-
-class VistaPais(Authentication,viewsets.ModelViewSet):
-    serializer_class = PaisSerializer
-    def get_queryset(self, pk=None):
-        if pk is None:
-            return self.get_serializer().Meta.model.objects.all()
-        else:
-            return self.get_serializer().Meta.model.objects.filter(idPais = pk).first()
-
 class VistaCargo(Authentication,viewsets.ModelViewSet):
     serializer_class = CargoSerializer
     def get_queryset(self, pk=None):

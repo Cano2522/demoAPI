@@ -50,4 +50,5 @@ urlpatterns = [
     path('apiMateriales/', include('MATERIALES.urls')),
     path('apiRolesOrg/', include('ROLESORG.urls')),
     path('usuario/', include('usuarios.urls')),
+    path('datosGeograficos/', include('DATOSGEOGRAFICOS.urls')),
 ]
