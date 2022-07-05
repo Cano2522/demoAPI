@@ -1,5 +1,6 @@
 from datetime import datetime
 from django.contrib.sessions.models import Session
+from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -78,7 +79,7 @@ class Logout(APIView):
                             session.delete()
                 token.delete()
 
-                session_message = 'Sessiones de usuario eliminadas.'
+                session_message = 'Sesiones de usuario eliminadas.'
                 token_message = 'Token eliminado.'
                 return Response({'mensaje_token':token_message, 'mensaje_sesion':session_message}, status = status.HTTP_200_OK)
             return Response({'error': 'No se ha encontrado un usuario con estas credenciales'}, status = status.HTTP_400_BAD_REQUEST)
@@ -87,6 +88,7 @@ class Logout(APIView):
 
 #VISTAS PARA EL CONTROL DE LA TABLA "User" que es la principal para el logeo y manejo de tokens
 # Create your views here.
+"""
 @api_view(['GET','POST'])
 def VistaUsuario(request):
     if request.method == 'GET':
@@ -126,6 +128,54 @@ def VistaUsuarioDetalle(request,pk=None):
             return Response({'mensaje':'Usuario eliminado correctamente!'}, status = status.HTTP_200_OK)
 
     return Response({'mensaje':'No se a encontrado un usuario con estos datos'}, status = status.HTTP_400_BAD_REQUEST)
+"""
+class UsuarioViewSet(Authentication,viewsets.GenericViewSet):
+    model = User
+    serializer_class = UsuarioSerializer
+    list_serializer_class = ListarUsuarioSerializer
+    query = None
+
+    def get_object(self, pk):
+        return get_object_or_404(self.model, pk=pk)
+
+    def get_queryset(self):
+        if self.queryset is None:
+            self.queryset = self.model.objects.all().values('id','username','Correo','password','Nombre','Apellidos','Genero','Rol','fechaCreacion','last_login')
+        return self.queryset
+
+    def list(self, request):
+        usuarios = self.get_queryset()
+        users_serializer = self.list_serializer_class(usuarios, many=True)
+        return Response(users_serializer.data, status = status.HTTP_200_OK)
+
+    def create(self, request):
+        user_serializer = self.serializer_class(data=request.data)
+        if user_serializer.is_valid():
+            user_serializer.save()
+            return Response(user_serializer.data, status = status.HTTP_201_CREATED)
+        return Response(user_serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+
+    def retrieve(self, request, pk=None):
+        user = self.get_object(pk)
+        user_serializer = self.serializer_class(user)
+        return Response(user_serializer.data)
+    
+    def update(self, request, pk=None):
+        usuario = self.get_object(pk)
+        user_serializer = EditarUsuarioSerializer(usuario, data=request.data)
+        if user_serializer.is_valid():
+            user_serializer.save()
+            return Response(user_serializer.data, status = status.HTTP_200_OK)
+        return Response(user_serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+    
+    def destroy(self, request, pk=None):
+        usuario = User.objects.filter(id=pk).first()
+        if usuario:
+            usuario.delete()
+            return Response({'mensaje':'Usuario eliminado correctamente!'}, status = status.HTTP_200_OK)
+        return Response({'mensaje':'No se a encontrado un usuario con estos datos'}, status = status.HTTP_404_NOT_FOUND)
+
+
 
 #VISTAS PARA EL CONTROL DE LAS TABLAS SECUNDARIAS DE USUARIOS
 

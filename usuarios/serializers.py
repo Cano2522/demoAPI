@@ -24,6 +24,11 @@ class UsuarioSerializer(serializers.ModelSerializer):
         usuario_actualizado.save()
         return usuario_actualizado
 
+class EditarUsuarioSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('username','Correo','Nombre','Apellidos','Genero','Rol')
+
 class ListarUsuarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
