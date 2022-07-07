@@ -1,3 +1,4 @@
+from django.db import connection
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework import status
@@ -39,7 +40,7 @@ class VistaProveedor(Authentication, viewsets.ModelViewSet):
         if proveedor:
             proveedor.delete()
             return Response({'mensaje':'Proveedor eliminado correctamente.'}, status = status.HTTP_200_OK)
-        return Response({'error':'No existe un Proveedor con estos datos.'})
+        return Response({'error':'No existe un Proveedor con estos datos.'}, status = status.HTTP_404_NOT_FOUND)
 
 class VistaMarca(Authentication, viewsets.ModelViewSet):
     serializer_class = MarcaSerializer
@@ -71,7 +72,7 @@ class VistaMarca(Authentication, viewsets.ModelViewSet):
         if marca:
             marca.delete()
             return Response({'mensaje':'Marca eliminada correctamente.'}, status = status.HTTP_200_OK)
-        return Response({'error':'No existe una Marca con estos datos.'})
+        return Response({'error':'No existe una Marca con estos datos.'}, status = status.HTTP_404_NOT_FOUND)
 
 class VistaSectorMercado(Authentication, viewsets.ModelViewSet):
     serializer_class = SectorMercadoSerializer
@@ -103,7 +104,7 @@ class VistaSectorMercado(Authentication, viewsets.ModelViewSet):
         if registro:
             registro.delete()
             return Response({'mensaje':'Registro eliminado correctamente.'}, status = status.HTTP_200_OK)
-        return Response({'error':'No existe un registro con estos datos.'})
+        return Response({'error':'No existe un registro con estos datos.'}, status = status.HTTP_404_NOT_FOUND)
 
 class VistaProveedorMarca(Authentication, viewsets.ModelViewSet):
     serializer_class = ProveedorMarcaSerializer
@@ -135,7 +136,7 @@ class VistaProveedorMarca(Authentication, viewsets.ModelViewSet):
         if registro:
             registro.delete()
             return Response({'mensaje':'Registro eliminado correctamente.'}, status = status.HTTP_200_OK)
-        return Response({'error':'No existe un registro con estos datos.'})
+        return Response({'error':'No existe un registro con estos datos.'},status = status.HTTP_404_NOT_FOUND)
 
 class VistaSucursalProv(Authentication, viewsets.ModelViewSet):
     serializer_class = SucursalProvSerializer
@@ -167,7 +168,7 @@ class VistaSucursalProv(Authentication, viewsets.ModelViewSet):
         if registro:
             registro.delete()
             return Response({'mensaje':'Registro eliminado correctamente.'}, status = status.HTTP_200_OK)
-        return Response({'error':'No existe un registro con estos datos.'})
+        return Response({'error':'No existe un registro con estos datos.'},status = status.HTTP_404_NOT_FOUND)
 
 class VistaSectorProv(Authentication, viewsets.ModelViewSet):
     serializer_class = SectorProvSerializer
@@ -199,4 +200,54 @@ class VistaSectorProv(Authentication, viewsets.ModelViewSet):
         if registro:
             registro.delete()
             return Response({'mensaje':'Registro eliminado correctamente.'}, status = status.HTTP_200_OK)
-        return Response({'error':'No existe un registro con estos datos.'})
+        return Response({'error':'No existe un registro con estos datos.'},status = status.HTTP_404_NOT_FOUND)
+
+class ListarSectorXProveedor(Authentication, viewsets.GenericViewSet):
+    def get_queryset(self):
+        with connection.cursor() as cursor:
+            listarSector = cursor.execute("SELECT Proveedor.Nombre AS NombreProv, SectorMercado.Nombre as NombreSector FROM Proveedor join SectorProv ON fk_Proveedor=idProveedor JOIN SectorMercado ON fk_SecMer=idSecMer")
+            listarSector = dictfetchall(cursor)
+            return listarSector
+        
+    def list(self, request):
+        data = self.get_queryset()
+        if data:
+            return Response(data, status = status.HTTP_200_OK)
+        else:
+            return Response({'mensaje':'No existen registros!'}, status = status.HTTP_404_NOT_FOUND)
+
+class ListarMarcaXProveedor(Authentication, viewsets.GenericViewSet):
+    def get_queryset(self):
+        with connection.cursor() as cursor:
+            listarMarca = cursor.execute("SELECT Proveedor.Nombre AS NombreProv,Marca.Nombre AS NombreMarca,Marca.Activo FROM Proveedor JOIN ProveedorMarca ON fk_Proveedor=idProveedor join Marca on fk_Marca=idMarca")
+            listarMarca = dictfetchall(cursor)
+            return listarMarca
+        
+    def list(self, request):
+        data = self.get_queryset()
+        if data:
+            return Response(data, status = status.HTTP_200_OK)
+        else:
+            return Response({'mensaje':'No existen registros!'}, status = status.HTTP_404_NOT_FOUND)
+
+class ListarSucursalXProveedor(Authentication, viewsets.GenericViewSet):
+    def get_queryset(self):
+        with connection.cursor() as cursor:
+            listarSucursal = cursor.execute("SELECT Proveedor.Nombre AS NombreProv,SucursalProv.Nombre AS Alias,SucursalProv.Calle,SucursalProv.noInt,SucursalProv.noExt,SucursalProv.Colonia,CP.cp,MunDeleg.Nombre AS Municipio,Estado.Nombre AS Estado,Pais.Nombre AS Pais FROM Proveedor join SucursalProv ON fk_Proveedor=idProveedor JOIN CP ON fk_CP=cp JOIN MunDeleg ON fk_MpioDel=idMunDeleg JOIN Estado ON fk_Estado=idEstado JOIN Pais ON fk_Pais=idPais")
+            listarSucursal = dictfetchall(cursor)
+            return listarSucursal
+        
+    def list(self, request):
+        data = self.get_queryset()
+        if data:
+            return Response(data, status = status.HTTP_200_OK)
+        else:
+            return Response({'mensaje':'No existen registros!'}, status = status.HTTP_404_NOT_FOUND)
+            
+
+def dictfetchall(cursor):
+    columns = [col[0] for col in cursor.description]
+    return [
+        dict(zip(columns, row))
+        for row in cursor.fetchall()
+    ]

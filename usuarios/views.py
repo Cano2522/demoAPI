@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.decorators import action
 from rest_framework import viewsets
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -142,6 +142,16 @@ class UsuarioViewSet(Authentication,viewsets.GenericViewSet):
         if self.queryset is None:
             self.queryset = self.model.objects.all().values('id','username','Correo','password','Nombre','Apellidos','Genero','Rol','fechaCreacion','last_login')
         return self.queryset
+    
+    @action(detail=True, methods=['post'])
+    def set_password(self, request, pk=None):
+        user = self.get_object(pk)
+        password_serializer = PasswordSerializer(data=request.data)
+        if password_serializer.is_valid():
+            user.set_password(password_serializer.validated_data['password'])
+            user.save()
+            return Response({'mensaje': 'Contraseña actualizada correctamente'}, status = status.HTTP_200_OK)
+        return Response({'error':password_serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
     def list(self, request):
         usuarios = self.get_queryset()
