@@ -17,7 +17,6 @@ class VistaCP(Authentication,viewsets.ModelViewSet):
             return self.get_serializer().Meta.model.objects.filter(cp = pk).first()
 
     def create(self, request):
-        print("AQUI SERIALIZER>>>>>",request.data)
         serializer = self.serializer_class(data = request.data)
         if serializer.is_valid():
             serializer.save()
