@@ -134,3 +134,17 @@ class DatosLaborales(models.Model):
 
     class Meta:
         db_table = 'DatosLaborales'
+
+class HistorialUsuario(models.Model):
+    id = models.BigAutoField(auto_created=True, primary_key= True, serialize= False, verbose_name='id')
+    Usuario = models.CharField(max_length=45,blank=True,null=True)
+    Entidad = models.CharField(max_length=45,blank=True,null=True)
+    Modulo = models.CharField(max_length=45,blank=True,null=True)
+    Movimiento = models.CharField(max_length=45,blank=True,null=True)
+    fecha = models.DateTimeField(blank=True, null=True,auto_now=True)
+
+    def __str__(self):
+        return f'{self.Usuario}: {self.Movimiento}'
+
+    class Meta:
+        db_table = 'HistorialUsuario'

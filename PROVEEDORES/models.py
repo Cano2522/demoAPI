@@ -26,7 +26,7 @@ class Proveedor(models.Model):
 
 class Marca(models.Model):
     idMarca = models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='idMarca')
-    Nombre = models.CharField(max_length=45, null=False)
+    Nombre = models.CharField(unique=True, max_length=45, null=False)
     Activo = models.BooleanField(blank=True, null=True)
 
     def __str__(self):

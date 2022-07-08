@@ -69,6 +69,11 @@ class DatosLaboralesSerializer(serializers.ModelSerializer):
         model = DatosLaborales
         fields = '__all__'
 
+class HistorialUsuarioSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = HistorialUsuario
+        fields = '__all__'
+
 # SERIALIZERS PARA MANEJAR TABLAS EXTRAS DE USUARIOS
 class DepartamentoSerializer(serializers.ModelSerializer):
     class Meta:

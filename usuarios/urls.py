@@ -6,6 +6,7 @@ from usuarios.views import *
 router = DefaultRouter()
 router.register('Empleados', VistaEmpleado, basename = 'VistaEmpleado')
 router.register('DatosLaborales', VistaDatosLaborales, basename = 'VistaDatosLaborales')
+router.register('HistorialUsuario', VistaHistorialUsuario, basename = 'VistaHistorialUsuario')
 router.register('Departamento', VistaDepartamento, basename = 'VistaDepartamento')
 router.register('Cargo', VistaCargo, basename = 'VistaCargo')
 router.register('Contrato', VistaContrato, basename = 'VistaContrato')
