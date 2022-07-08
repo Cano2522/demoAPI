@@ -52,4 +52,5 @@ urlpatterns = [
     path('apiUsuario/', include('usuarios.urls')),
     path('apiDatosGeograficos/', include('DATOSGEOGRAFICOS.urls')),
     path('apiProveedores/', include('PROVEEDORES.urls')),
+    path('apiUnidadesMedida/', include('UNIDADESMEDIDA.urls')),
 ]

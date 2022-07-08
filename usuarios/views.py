@@ -39,7 +39,7 @@ class Login(ObtainAuthToken):
                         'mensaje': 'Inicio de Sesión Exitoso.'
                     }, status = status.HTTP_201_CREATED)
                 else:
-                    all_sessions = Session.objects.filet(expire_date__gte = datetime.now())
+                    all_sessions = Session.objects.filter(expire_date__gte = datetime.now())
                     if all_sessions.exists():
                         for session in all_sessions:
                             session_data = session.get_decoded()

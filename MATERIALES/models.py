@@ -1,4 +1,5 @@
 from django.db import models
+from UNIDADESMEDIDA.models import TipoUniMed,UnidadesMedida
 
 # Create your models here.
 #ENTIDADES CORRESPONDIENTES A "MATERIALES"
@@ -72,31 +73,31 @@ class TipoConsistencia(models.Model):
     class Meta:
         db_table = 'TipoConsistencia'
 
-class TipoUniMed(models.Model):
-    idTum = models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='idTum')
-    Tipo = models.CharField(max_length=65, null=False)
+# class TipoUniMed(models.Model):
+#     idTum = models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='idTum')
+#     Tipo = models.CharField(max_length=65, null=False)
 
-    def __str__(self):
-        return f'{self.Tipo}'
-        #return f'{self.idTipMed} <> {self.Tipo}'
+#     def __str__(self):
+#         return f'{self.Tipo}'
+#         #return f'{self.idTipMed} <> {self.Tipo}'
 
-    class Meta:
-        db_table = 'TipoUniMed'
+#     class Meta:
+#         db_table = 'TipoUniMed'
 
-class UnidadesMedida(models.Model):
-    idUniMed = models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='idUniMed')
-    cveSat = models.CharField(max_length=3, blank=True, null=True)
-    Unidad = models.CharField(max_length=15, null=False)
-    Descripcion = models.CharField(max_length=80, null=False)
-    Sistema = models.CharField(max_length=30, blank=True, null=True)
-    fk_Stu = models.IntegerField(blank= True,null=True)
+# class UnidadesMedida(models.Model):
+#     idUniMed = models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='idUniMed')
+#     cveSat = models.CharField(max_length=3, blank=True, null=True)
+#     Unidad = models.CharField(max_length=15, null=False)
+#     Descripcion = models.CharField(max_length=80, null=False)
+#     Sistema = models.CharField(max_length=30, blank=True, null=True)
+#     fk_Stu = models.IntegerField(blank= True,null=True)
 
-    def __str__(self):
-        return f'{self.Unidad}'
-        #return f'{self.idUniMed} <> {self.Unidad} <> {self.Descripcion} <> {self.Sistema} <> {self.fk_TipUniMed}'
+#     def __str__(self):
+#         return f'{self.Unidad}'
+#         #return f'{self.idUniMed} <> {self.Unidad} <> {self.Descripcion} <> {self.Sistema} <> {self.fk_TipUniMed}'
 
-    class Meta:
-        db_table = 'UnidadesMedida'
+#     class Meta:
+#         db_table = 'UnidadesMedida'
 
 class Esfuerzo(models.Model):
     idEsfuerzo = models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='idEsfuerzo')

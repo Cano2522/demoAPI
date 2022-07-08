@@ -125,10 +125,10 @@ class ListarFibraConcre(Authentication,ListAPIView):
     queryset = FibraConcre.objects.all()
     #permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
-class ListarUnidadesMedida(Authentication,ListAPIView):
-    serializer_class = UnidadesMedidaSerializer
-    queryset = UnidadesMedida.objects.all()
-    #permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+# class ListarUnidadesMedida(Authentication,ListAPIView):
+#     serializer_class = UnidadesMedidaSerializer
+#     queryset = UnidadesMedida.objects.all()
+#     #permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 # @api_view(['GET'],)
 # def ListarConcretosMateriales(request):

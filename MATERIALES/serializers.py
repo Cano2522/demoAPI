@@ -93,7 +93,7 @@ class FibraConcreSerializer(serializers.ModelSerializer):
         model = FibraConcre
         fields = '__all__'
 
-class UnidadesMedidaSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = UnidadesMedida
-        fields = '__all__'
+# class UnidadesMedidaSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = UnidadesMedida
+#         fields = '__all__'
