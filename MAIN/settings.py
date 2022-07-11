@@ -110,7 +110,7 @@ DATABASES = {
         'ENGINE': 'mssql',
         'NAME': 'ccdatabase azure',
         'USER': 'eduardo',
-        'PASSWORD': '12345',
+        'PASSWORD': 'admin1',
         'HOST': 'CC-MX-BIM-005',  
         'PORT': '',
 

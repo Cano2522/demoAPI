@@ -41,7 +41,7 @@ class EliminarCatgoria(Authentication,DestroyAPIView): #para eliminar no es requ
         if registro:
             registro.delete()
             return Response({'mensaje':'Registro eliminado correctamente!'},status.HTTP_200_OK)
-        return Response({'error': 'No existe un registro con estos datos!'}, status = status.HTTP_400_BAD_REQUEST)
+        return Response({'error': 'No existe un registro con estos datos!'}, status = status.HTTP_404_NOT_FOUND)
 
 #CRUD DEL NIVEL 2 DE UNIFORMAT
 class ListarUFTNivel2(Authentication,ListAPIView):
@@ -67,7 +67,7 @@ class EliminarUFTNivel2(Authentication,DestroyAPIView): #para eliminar no es req
         if registro:
             registro.delete()
             return Response({'mensaje':'Registro eliminado correctamente!'},status.HTTP_200_OK)
-        return Response({'error': 'No existe un registro con estos datos!'}, status = status.HTTP_400_BAD_REQUEST)
+        return Response({'error': 'No existe un registro con estos datos!'}, status = status.HTTP_404_NOT_FOUND)
 
 #CRUD DEL NIVEL 3 DE UNIFORMAT
 class ListarUFTNivel3(Authentication,ListAPIView):
@@ -93,7 +93,7 @@ class EliminarUFTNivel3(Authentication,DestroyAPIView): #para eliminar no es req
         if registro:
             registro.delete()
             return Response({'mensaje':'Registro eliminado correctamente!'},status.HTTP_200_OK)
-        return Response({'error': 'No existe un registro con estos datos!'}, status = status.HTTP_400_BAD_REQUEST)
+        return Response({'error': 'No existe un registro con estos datos!'}, status = status.HTTP_404_NOT_FOUND)
 
 #CRUD DEL NIVEL 4 DE UNIFORMAT
 class ListarUFTNivel4(Authentication,ListAPIView):
@@ -119,7 +119,7 @@ class EliminarUFTNivel4(Authentication,DestroyAPIView): #para eliminar no es req
         if registro:
             registro.delete()
             return Response({'mensaje':'Registro eliminado correctamente!'},status.HTTP_200_OK)
-        return Response({'error': 'No existe un registro con estos datos!'}, status = status.HTTP_400_BAD_REQUEST)
+        return Response({'error': 'No existe un registro con estos datos!'}, status = status.HTTP_404_NOT_FOUND)
 
 #CRUD DEL NIVEL 5 DE UNIFORMAT
 class ListarUFTNivel5(Authentication,ListAPIView):
@@ -145,4 +145,4 @@ class EliminarUFTNivel5(Authentication,DestroyAPIView): #para eliminar no es req
         if registro:
             registro.delete()
             return Response({'mensaje':'Registro eliminado correctamente!'},status.HTTP_200_OK)
-        return Response({'error': 'No existe un registro con estos datos!'}, status = status.HTTP_400_BAD_REQUEST)
+        return Response({'error': 'No existe un registro con estos datos!'}, status = status.HTTP_404_NOT_FOUND)

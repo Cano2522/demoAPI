@@ -47,7 +47,7 @@ class EliminarOmniclass41(Authentication,DestroyAPIView):
         if registro:
             registro.delete()
             return Response({'mensaje':'Registro eliminado correctamente!'},status.HTTP_200_OK)
-        return Response({'error': 'No existe un registro con estos datos!'}, status = status.HTTP_400_BAD_REQUEST)
+        return Response({'error': 'No existe un registro con estos datos!'}, status = status.HTTP_404_NOT_FOUND)
 
 #TABLA OMNICLASS 41 NIVEL 1
 
@@ -78,7 +78,7 @@ class EliminarOMC41Nivel1(Authentication,DestroyAPIView):
         if registro:
             registro.delete()
             return Response({'mensaje':'Registro eliminado correctamente!'},status.HTTP_200_OK)
-        return Response({'error': 'No existe un registro con estos datos!'}, status = status.HTTP_400_BAD_REQUEST)
+        return Response({'error': 'No existe un registro con estos datos!'}, status = status.HTTP_404_NOT_FOUND)
 
 #TABLA OMNICLASS 41 NIVEL 2
 
@@ -109,7 +109,7 @@ class EliminarOMC41Nivel2(Authentication,DestroyAPIView):
         if registro:
             registro.delete()
             return Response({'mensaje':'Registro eliminado correctamente!'},status.HTTP_200_OK)
-        return Response({'error': 'No existe un registro con estos datos!'}, status = status.HTTP_400_BAD_REQUEST)
+        return Response({'error': 'No existe un registro con estos datos!'}, status = status.HTTP_404_NOT_FOUND)
 
 #TABLA OMNICLASS 41 NIVEL 3
 
@@ -140,7 +140,7 @@ class EliminarOMC41Nivel3(Authentication,DestroyAPIView):
         if registro:
             registro.delete()
             return Response({'mensaje':'Registro eliminado correctamente!'},status.HTTP_200_OK)
-        return Response({'error': 'No existe un registro con estos datos!'}, status = status.HTTP_400_BAD_REQUEST)
+        return Response({'error': 'No existe un registro con estos datos!'}, status = status.HTTP_404_NOT_FOUND)
 
 #TABLA OMNICLASS 41 NIVEL 4
 
@@ -171,7 +171,7 @@ class EliminarOMC41Nivel4(Authentication,DestroyAPIView):
         if registro:
             registro.delete()
             return Response({'mensaje':'Registro eliminado correctamente!'},status.HTTP_200_OK)
-        return Response({'error': 'No existe un registro con estos datos!'}, status = status.HTTP_400_BAD_REQUEST)
+        return Response({'error': 'No existe un registro con estos datos!'}, status = status.HTTP_404_NOT_FOUND)
 
 #TABLA OMNICLASS 41 NIVEL 5
 
@@ -202,7 +202,7 @@ class EliminarOMC41Nivel5(Authentication,DestroyAPIView):
         if registro:
             registro.delete()
             return Response({'mensaje':'Registro eliminado correctamente!'},status.HTTP_200_OK)
-        return Response({'error': 'No existe un registro con estos datos!'}, status = status.HTTP_400_BAD_REQUEST)
+        return Response({'error': 'No existe un registro con estos datos!'}, status = status.HTTP_404_NOT_FOUND)
 
 #TABLA OMNICLASS 41 NIVEL 6
 
@@ -233,4 +233,4 @@ class EliminarOMC41Nivel6(Authentication,DestroyAPIView):
         if registro:
             registro.delete()
             return Response({'mensaje':'Registro eliminado correctamente!'},status.HTTP_200_OK)
-        return Response({'error': 'No existe un registro con estos datos!'}, status = status.HTTP_400_BAD_REQUEST)
+        return Response({'error': 'No existe un registro con estos datos!'}, status = status.HTTP_404_NOT_FOUND)

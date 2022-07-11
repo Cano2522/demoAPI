@@ -21,7 +21,7 @@ class VistaCP(Authentication,viewsets.ModelViewSet):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data,status = status.HTTP_201_CREATED)
-        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+        return Response({'error':serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
     
     def update(self, request, pk=None):
         if self.get_queryset(pk):
@@ -29,15 +29,15 @@ class VistaCP(Authentication,viewsets.ModelViewSet):
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_200_OK)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        return Response({'error':'No existe un CP con esos datos'}, status = status.HTTP_400_BAD_REQUEST)
+            return Response({'error':serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'error':'No existe un CP con esos datos'}, status = status.HTTP_404_NOT_FOUND)
     
     def destroy(self, request, pk=None):
         registro = self.get_queryset().filter(cp=pk).first()
         if registro:
             registro.delete()
             return Response({'mensaje':'CP eliminado correctamente!'}, status = status.HTTP_200_OK)
-        return Response({'error':'No existe un CP con estos datos!'}, status = status.HTTP_400_BAD_REQUEST)
+        return Response({'error':'No existe un CP con estos datos!'}, status = status.HTTP_404_NOT_FOUND)
 
 class VistaMunDeleg(Authentication,viewsets.ModelViewSet):
     serializer_class = MunicipioSerializer
@@ -52,7 +52,7 @@ class VistaMunDeleg(Authentication,viewsets.ModelViewSet):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data,status = status.HTTP_201_CREATED)
-        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+        return Response({'error':serializer.errors}, status = status.HTTP_400_BAD_REQUEST)
     
     def update(self, request, pk=None):
         if self.get_queryset(pk):
@@ -60,15 +60,15 @@ class VistaMunDeleg(Authentication,viewsets.ModelViewSet):
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_200_OK)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        return Response({'error':'No existe un Municipio/Delegación con esos datos'}, status = status.HTTP_400_BAD_REQUEST)
+            return Response({'error':serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'error':'No existe un Municipio/Delegación con esos datos'}, status = status.HTTP_404_NOT_FOUND)
     
     def destroy(self, request, pk=None):
         registro = self.get_queryset().filter(idMunDeleg=pk).first()
         if registro:
             registro.delete()
             return Response({'mensaje':'Municipio/Delegación eliminado correctamente!'}, status = status.HTTP_200_OK)
-        return Response({'error':'No existe un Municipio/Delegación con estos datos!'}, status = status.HTTP_400_BAD_REQUEST)
+        return Response({'error':'No existe un Municipio/Delegación con estos datos!'}, status = status.HTTP_404_NOT_FOUND)
 
 class VistaEstado(Authentication,viewsets.ModelViewSet):
     serializer_class = EstadoSerializer
@@ -83,7 +83,7 @@ class VistaEstado(Authentication,viewsets.ModelViewSet):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data,status = status.HTTP_201_CREATED)
-        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+        return Response({'error':serializer.errors}, status = status.HTTP_400_BAD_REQUEST)
     
     def update(self, request, pk=None):
         if self.get_queryset(pk):
@@ -91,15 +91,15 @@ class VistaEstado(Authentication,viewsets.ModelViewSet):
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_200_OK)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        return Response({'error':'No existe un Estado con esos datos'}, status = status.HTTP_400_BAD_REQUEST)
+            return Response({'error':serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'error':'No existe un Estado con esos datos'}, status = status.HTTP_404_NOT_FOUND)
     
     def destroy(self, request, pk=None):
         registro = self.get_queryset().filter(idEstado=pk).first()
         if registro:
             registro.delete()
             return Response({'mensaje':'Estado eliminado correctamente!'}, status = status.HTTP_200_OK)
-        return Response({'error':'No existe un Estado con estos datos!'}, status = status.HTTP_400_BAD_REQUEST)
+        return Response({'error':'No existe un Estado con estos datos!'}, status = status.HTTP_404_NOT_FOUND)
 
 class VistaPais(Authentication,viewsets.ModelViewSet):
     serializer_class = PaisSerializer
@@ -114,7 +114,7 @@ class VistaPais(Authentication,viewsets.ModelViewSet):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data,status = status.HTTP_201_CREATED)
-        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+        return Response({'error':serializer.errors}, status = status.HTTP_400_BAD_REQUEST)
     
     def update(self, request, pk=None):
         if self.get_queryset(pk):
@@ -122,12 +122,12 @@ class VistaPais(Authentication,viewsets.ModelViewSet):
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_200_OK)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        return Response({'error':'No existe un País con esos datos'}, status = status.HTTP_400_BAD_REQUEST)
+            return Response({'error':serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'error':'No existe un País con esos datos'}, status = status.HTTP_404_NOT_FOUND)
     
     def destroy(self, request, pk=None):
         registro = self.get_queryset().filter(idPais=pk).first()
         if registro:
             registro.delete()
             return Response({'mensaje':'País eliminado correctamente!'}, status = status.HTTP_200_OK)
-        return Response({'error':'No existe un País con estos datos!'}, status = status.HTTP_400_BAD_REQUEST)
+        return Response({'error':'No existe un País con estos datos!'}, status = status.HTTP_404_NOT_FOUND)

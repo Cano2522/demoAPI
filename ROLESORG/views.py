@@ -20,7 +20,7 @@ class RolesOrg(Authentication,viewsets.ModelViewSet):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status = status.HTTP_201_CREATED)
-        return Response(serializer.error, status = status.HTTP_400_BAD_REQUEST)
+        return Response({'error':serializer.errors}, status = status.HTTP_400_BAD_REQUEST)
 
     def update(self, request, pk=None):
         if self.get_queryset(pk):
@@ -28,14 +28,14 @@ class RolesOrg(Authentication,viewsets.ModelViewSet):
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data, status = status.HTTP_200_OK)
-            return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
-        return Response({'error':'No existe un Registro con esos datos'}, status = status.HTTP_400_BAD_REQUEST)
+            return Response({'error':serializer.errors}, status = status.HTTP_400_BAD_REQUEST)
+        return Response({'error':'No existe un Registro con esos datos'}, status = status.HTTP_404_NOT_FOUND)
 
     def destroy(self, request, pk=None):
         registro = self.get_queryset(pk)
         if registro:
             registro.delete()
             return Response({'mensaje':'Registro eliminado correctamente'}, status = status.HTTP_200_OK)
-        return Response({'error':'No existe un Registro con estos datos'}, status = status.HTTP_400_BAD_REQUEST)
+        return Response({'error':'No existe un Registro con estos datos'}, status = status.HTTP_404_NOT_FOUND)
 
 

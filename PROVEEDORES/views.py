@@ -24,7 +24,7 @@ class VistaProveedor(Authentication, viewsets.ModelViewSet):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status = status.HTTP_201_CREATED)
-        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+        return Response({'error':serializer.errors}, status = status.HTTP_400_BAD_REQUEST)
     
     def update(self, request, pk=None):
         if self.get_queryset(pk):
@@ -32,8 +32,8 @@ class VistaProveedor(Authentication, viewsets.ModelViewSet):
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data, status = status.HTTP_200_OK)
-            return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
-        return Response({'error':'No existe un Proveedor con esos datos.'}, status = status.HTTP_400_BAD_REQUEST)
+            return Response({'error':serializer.errors}, status = status.HTTP_400_BAD_REQUEST)
+        return Response({'error':'No existe un Proveedor con esos datos.'}, status = status.HTTP_404_NOT_FOUND)
     
     def destroy(self, request, pk=None):
         proveedor = self.get_queryset().filter(idProveedor=pk).first()
@@ -56,7 +56,7 @@ class VistaMarca(Authentication, viewsets.ModelViewSet):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status = status.HTTP_201_CREATED)
-        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+        return Response({'error':serializer.errors}, status = status.HTTP_400_BAD_REQUEST)
     
     def update(self, request, pk=None):
         if self.get_queryset(pk):
@@ -64,8 +64,8 @@ class VistaMarca(Authentication, viewsets.ModelViewSet):
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data, status = status.HTTP_200_OK)
-            return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
-        return Response({'error':'No existe una Marca con esos datos.'}, status = status.HTTP_400_BAD_REQUEST)
+            return Response({'error':serializer.errors}, status = status.HTTP_400_BAD_REQUEST)
+        return Response({'error':'No existe una Marca con esos datos.'}, status = status.HTTP_404_NOT_FOUND)
     
     def destroy(self, request, pk=None):
         marca = self.get_queryset().filter(idMarca=pk).first()
@@ -88,7 +88,7 @@ class VistaSectorMercado(Authentication, viewsets.ModelViewSet):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status = status.HTTP_201_CREATED)
-        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+        return Response({'error':serializer.errors}, status = status.HTTP_400_BAD_REQUEST)
     
     def update(self, request, pk=None):
         if self.get_queryset(pk):
@@ -96,8 +96,8 @@ class VistaSectorMercado(Authentication, viewsets.ModelViewSet):
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data, status = status.HTTP_200_OK)
-            return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
-        return Response({'error':'No existe un registro con esos datos.'}, status = status.HTTP_400_BAD_REQUEST)
+            return Response({'error':serializer.errors}, status = status.HTTP_400_BAD_REQUEST)
+        return Response({'error':'No existe un registro con esos datos.'}, status = status.HTTP_404_NOT_FOUND)
     
     def destroy(self, request, pk=None):
         registro = self.get_queryset().filter(idSecMer=pk).first()
@@ -120,7 +120,7 @@ class VistaProveedorMarca(Authentication, viewsets.ModelViewSet):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status = status.HTTP_201_CREATED)
-        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+        return Response({'error':serializer.errors}, status = status.HTTP_400_BAD_REQUEST)
     
     def update(self, request, pk=None):
         if self.get_queryset(pk):
@@ -128,8 +128,8 @@ class VistaProveedorMarca(Authentication, viewsets.ModelViewSet):
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data, status = status.HTTP_200_OK)
-            return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
-        return Response({'error':'No existe un registro con esos datos.'}, status = status.HTTP_400_BAD_REQUEST)
+            return Response({'error':serializer.errors}, status = status.HTTP_400_BAD_REQUEST)
+        return Response({'error':'No existe un registro con esos datos.'}, status = status.HTTP_404_NOT_FOUND)
     
     def destroy(self, request, pk=None):
         registro = self.get_queryset().filter(idProveedorMarca=pk).first()
@@ -152,7 +152,7 @@ class VistaSucursalProv(Authentication, viewsets.ModelViewSet):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status = status.HTTP_201_CREATED)
-        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+        return Response({'error':serializer.errors}, status = status.HTTP_400_BAD_REQUEST)
     
     def update(self, request, pk=None):
         if self.get_queryset(pk):
@@ -160,8 +160,8 @@ class VistaSucursalProv(Authentication, viewsets.ModelViewSet):
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data, status = status.HTTP_200_OK)
-            return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
-        return Response({'error':'No existe un registro con esos datos.'}, status = status.HTTP_400_BAD_REQUEST)
+            return Response({'error':serializer.errors}, status = status.HTTP_400_BAD_REQUEST)
+        return Response({'error':'No existe un registro con esos datos.'}, status = status.HTTP_404_NOT_FOUND)
     
     def destroy(self, request, pk=None):
         registro = self.get_queryset().filter(idSucProv=pk).first()
@@ -184,7 +184,7 @@ class VistaSectorProv(Authentication, viewsets.ModelViewSet):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status = status.HTTP_201_CREATED)
-        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+        return Response({'error':serializer.errors}, status = status.HTTP_400_BAD_REQUEST)
     
     def update(self, request, pk=None):
         if self.get_queryset(pk):
@@ -192,8 +192,8 @@ class VistaSectorProv(Authentication, viewsets.ModelViewSet):
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data, status = status.HTTP_200_OK)
-            return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
-        return Response({'error':'No existe un registro con esos datos.'}, status = status.HTTP_400_BAD_REQUEST)
+            return Response({'error':serializer.errors}, status = status.HTTP_400_BAD_REQUEST)
+        return Response({'error':'No existe un registro con esos datos.'}, status = status.HTTP_404_NOT_FOUND)
     
     def destroy(self, request, pk=None):
         registro = self.get_queryset().filter(idSectorProv=pk).first()

@@ -20,7 +20,7 @@ class VistaTipoUniMed(Authentication, viewsets.ModelViewSet):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data,status = status.HTTP_201_CREATED)
-        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+        return Response({'error':serializer.errors}, status = status.HTTP_400_BAD_REQUEST)
     
     def update(self, request, pk=None):
         if self.get_queryset(pk):
@@ -28,15 +28,15 @@ class VistaTipoUniMed(Authentication, viewsets.ModelViewSet):
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_200_OK)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        return Response({'error':'No existe un Registro con esos datos'}, status = status.HTTP_404_NOT_FOUND)
+            return Response({'error':serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'error':'No existe un Tipo de Unidad de Medida con esos datos'}, status = status.HTTP_404_NOT_FOUND)
     
     def destroy(self, request, pk=None):
         registro = self.get_queryset().filter(idTum=pk).first()
         if registro:
             registro.delete()
-            return Response({'mensaje':'Registro eliminado correctamente!'}, status = status.HTTP_200_OK)
-        return Response({'error':'No existe un Registro con estos datos!'}, status = status.HTTP_404_NOT_FOUND)
+            return Response({'mensaje':'Tipo de Unidad de Medida eliminado correctamente!'}, status = status.HTTP_200_OK)
+        return Response({'error':'No existe un Tipo de Unidad de Medida con estos datos!'}, status = status.HTTP_404_NOT_FOUND)
 
 class VistaSubTipUni(Authentication, viewsets.ModelViewSet):
     serializer_class = SubTipUniSerializer
@@ -52,7 +52,7 @@ class VistaSubTipUni(Authentication, viewsets.ModelViewSet):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data,status = status.HTTP_201_CREATED)
-        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+        return Response({'error':serializer.errors}, status = status.HTTP_400_BAD_REQUEST)
     
     def update(self, request, pk=None):
         if self.get_queryset(pk):
@@ -60,15 +60,15 @@ class VistaSubTipUni(Authentication, viewsets.ModelViewSet):
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_200_OK)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        return Response({'error':'No existe un Registro con esos datos'}, status = status.HTTP_404_NOT_FOUND)
+            return Response({'error':serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'error':'No existe un Subtipo de Unidad de Medida con esos datos'}, status = status.HTTP_404_NOT_FOUND)
     
     def destroy(self, request, pk=None):
         registro = self.get_queryset().filter(idStu=pk).first()
         if registro:
             registro.delete()
-            return Response({'mensaje':'Registro eliminado correctamente!'}, status = status.HTTP_200_OK)
-        return Response({'error':'No existe un Registro con estos datos!'}, status = status.HTTP_404_NOT_FOUND)
+            return Response({'mensaje':'Subtipo de Unidad de Medida eliminado correctamente!'}, status = status.HTTP_200_OK)
+        return Response({'error':'No existe un Subtipo de Unidad de Medida con estos datos!'}, status = status.HTTP_404_NOT_FOUND)
 
 class VistaUnidadesMedida(Authentication, viewsets.ModelViewSet):
     serializer_class = UnidadesMedidaSerializer
@@ -84,7 +84,7 @@ class VistaUnidadesMedida(Authentication, viewsets.ModelViewSet):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data,status = status.HTTP_201_CREATED)
-        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+        return Response({'error':serializer.errors}, status = status.HTTP_400_BAD_REQUEST)
     
     def update(self, request, pk=None):
         if self.get_queryset(pk):
@@ -92,12 +92,12 @@ class VistaUnidadesMedida(Authentication, viewsets.ModelViewSet):
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_200_OK)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        return Response({'error':'No existe un Registro con esos datos'}, status = status.HTTP_404_NOT_FOUND)
+            return Response({'error':serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'error':'No existe una Unidad de Medida con esos datos'}, status = status.HTTP_404_NOT_FOUND)
     
     def destroy(self, request, pk=None):
         registro = self.get_queryset().filter(idUniMed=pk).first()
         if registro:
             registro.delete()
-            return Response({'mensaje':'Registro eliminado correctamente!'}, status = status.HTTP_200_OK)
-        return Response({'error':'No existe un Registro con estos datos!'}, status = status.HTTP_404_NOT_FOUND)
+            return Response({'mensaje':'Unidad de Medida eliminada correctamente!'}, status = status.HTTP_200_OK)
+        return Response({'error':'No existe una Unidad de Medida con estos datos!'}, status = status.HTTP_404_NOT_FOUND)
