@@ -152,6 +152,26 @@ class UsuarioViewSet(Authentication,viewsets.GenericViewSet):
             user.save()
             return Response({'mensaje': 'Contraseña actualizada correctamente'}, status = status.HTTP_200_OK)
         return Response({'error':password_serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+    
+    @action(detail=True, methods=['get'])
+    def set_active_on(self, request, pk=None):
+        user = self.get_object(pk)
+        if user.is_active == False:
+            user.is_active = True
+            user.save()
+            return Response({'mensaje': 'Usuario activado correctamente'}, status = status.HTTP_200_OK)
+        else:
+            return Response({'mensaje': 'El usuario ya esta activo'}, status=status.HTTP_400_BAD_REQUEST)
+
+    @action(detail=True, methods=['get'])
+    def set_active_off(self, request, pk=None):
+        user = self.get_object(pk)
+        if user.is_active == True:
+            user.is_active = False
+            user.save()
+            return Response({'mensaje': 'Usuario desactivado correctamente'}, status = status.HTTP_200_OK)
+        else:
+            return Response({'mensaje': 'El usuario ya esta desactivado'}, status=status.HTTP_400_BAD_REQUEST)
 
     def list(self, request):
         usuarios = self.get_queryset()
@@ -180,6 +200,7 @@ class UsuarioViewSet(Authentication,viewsets.GenericViewSet):
     
     def destroy(self, request, pk=None):
         usuario = User.objects.filter(id=pk).first()
+        # usuario = self.model.objects.filter(id=pk).update(is_active=False)
         if usuario:
             usuario.delete()
             return Response({'mensaje':'Usuario eliminado correctamente!'}, status = status.HTTP_200_OK)
