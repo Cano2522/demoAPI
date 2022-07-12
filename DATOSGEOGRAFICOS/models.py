@@ -39,7 +39,7 @@ class Mundeleg(models.Model):
 
 class CP(models.Model): 
     cp = models.BigAutoField(auto_created=True, primary_key= True, serialize= False, verbose_name='cp')
-    fk_MpioDel = models.ForeignKey(Mundeleg,on_delete=models.CASCADE, db_column='fk_MpioDel', verbose_name='Municipio')
+    fk_MunDeleg = models.ForeignKey(Mundeleg,on_delete=models.CASCADE, db_column='fk_MunDeleg', verbose_name='Municipio')
 
     def __str__(self):
         return f'{self.cp}'

@@ -5,7 +5,7 @@ from django.db import models
 class RolesOrg(models.Model):
     idRolOrg = models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='idRolOrg')
     cveMo = models.IntegerField(blank=True, null=True)
-    Codigo = models.CharField(max_length=50, null=False)
+    Codigo = models.CharField(max_length=11, null=False)
     Consecutivo = models.CharField(max_length=5, null=False)
     descriEng = models.CharField(max_length=65, blank=True, null=True)
     descriSpa = models.CharField(max_length=75, null=False)

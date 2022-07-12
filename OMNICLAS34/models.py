@@ -18,7 +18,7 @@ class OMC34Nivel1(models.Model):
 
 class OMC34Nivel2(models.Model):
     idOmc34N2 = models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='idOmc34N2')
-    cveRol = models.IntegerField(blank=True, null=True)
+    # cveRol = models.IntegerField(blank=True, null=True)
     Codigo = models.CharField(max_length=9, null=False)
     descriEng = models.CharField(max_length=35, null=False)
     descriSpa = models.CharField(max_length=50, null=False)
@@ -36,7 +36,7 @@ class OMC34Nivel2(models.Model):
 
 class OMC34Nivel3(models.Model):
     idOmc34N3 = models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='idOmc34N3')
-    cveRol = models.IntegerField(blank=True, null=True)
+    # cveRol = models.IntegerField(blank=True, null=True)
     Codigo = models.CharField(max_length=9, null=False)
     descriEng = models.CharField(max_length=50, null=False)
     descriSpa = models.CharField(max_length=50, null=False)
@@ -54,7 +54,7 @@ class OMC34Nivel3(models.Model):
 
 class OMC34Nivel4(models.Model):
     idOmc34N4 = models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='idOmc34N3')
-    cveRol = models.IntegerField(blank=True, null=True)
+    # cveRol = models.IntegerField(blank=True, null=True)
     Codigo = models.CharField(max_length=11, null=False)
     descriEng = models.CharField(max_length=50, null=False)
     descriSpa = models.CharField(max_length=65, null=False)

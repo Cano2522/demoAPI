@@ -137,11 +137,12 @@ class DatosLaborales(models.Model):
 
 class HistorialUsuario(models.Model):
     id = models.BigAutoField(auto_created=True, primary_key= True, serialize= False, verbose_name='id')
-    Usuario = models.CharField(max_length=45,blank=True,null=True)
-    Entidad = models.CharField(max_length=45,blank=True,null=True)
-    Modulo = models.CharField(max_length=45,blank=True,null=True)
-    Movimiento = models.CharField(max_length=45,blank=True,null=True)
-    fecha = models.DateTimeField(blank=True, null=True,auto_now=True)
+    usuario = models.CharField(max_length=45,null=False)
+    entidad = models.CharField(max_length=45,null=False)
+    modulo = models.CharField(max_length=45,null=False)
+    movimiento = models.CharField(max_length=45,null=False)
+    fecha = models.DateTimeField(null=False,auto_now=True)
+    observaciones = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
         return f'{self.Usuario}: {self.Movimiento}'

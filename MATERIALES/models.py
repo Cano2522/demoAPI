@@ -232,10 +232,10 @@ class Materiales(models.Model):
     palabrasCve = models.CharField(max_length=45, blank=True, null=True)
     desCorEng = models.CharField(max_length=100, blank=True, null=True)
     desLargEng = models.TextField(blank=True, null=True)
-    fuenteInf = models.CharField(max_length=45, blank=True, null=True)
+    fuenteInf = models.CharField(max_length=45, null=False)
     #fecRegInf = models.DateTimeField(blank=True, null=True)
     # fecRegInf = models.CharField(max_length=45, blank=True, null=True)
-    fecRegInf = models.DateField(blank=True, null=True)
+    fecRegInf = models.DateField(null=False)
     codigoBimsa = models.CharField(max_length=15, blank=True, null=True)
 
     def __str__(self):

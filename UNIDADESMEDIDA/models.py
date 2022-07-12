@@ -26,7 +26,7 @@ class SubTipUni(models.Model):
 class UnidadesMedida(models.Model):
     idUniMed = models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='idUniMed')
     cveSat = models.CharField(max_length=50,blank=True,null=True)
-    Unidad = models.CharField(max_length=50,null=False)
+    Unidad = models.CharField(max_length=50,null=False, unique=True)
     Descripcion = models.CharField(max_length=80,null=False)
     Sistema = models.CharField(max_length=30,blank=True,null=True)
     fk_Stu = models.ForeignKey(SubTipUni, on_delete=models.CASCADE, db_column='fk_Stu', verbose_name='Subtipo Unidad de Medida')
