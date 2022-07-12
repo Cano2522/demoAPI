@@ -205,7 +205,7 @@ class VistaSectorProv(Authentication, viewsets.ModelViewSet):
 class ListarSectorXProveedor(Authentication, viewsets.GenericViewSet):
     def get_queryset(self):
         with connection.cursor() as cursor:
-            listarSector = cursor.execute("SELECT Proveedor.Nombre AS NombreProv, SectorMercado.Nombre as NombreSector FROM Proveedor join SectorProv ON fk_Proveedor=idProveedor JOIN SectorMercado ON fk_SecMer=idSecMer")
+            listarSector = cursor.execute("SELECT Proveedor.Nombre AS NombreProv, Proveedor.RFC,Proveedor.Email,Proveedor.Observaciones,Proveedor.urlSitioWeb,Proveedor.Fabricante,Proveedor.Activo,SectorMercado.Nombre AS NombreSector FROM Proveedor JOIN SectorProv ON fk_Proveedor=idProveedor JOIN SectorMercado ON fk_SecMer=idSecMer")
             listarSector = dictfetchall(cursor)
             return listarSector
         
@@ -219,7 +219,7 @@ class ListarSectorXProveedor(Authentication, viewsets.GenericViewSet):
 class ListarMarcaXProveedor(Authentication, viewsets.GenericViewSet):
     def get_queryset(self):
         with connection.cursor() as cursor:
-            listarMarca = cursor.execute("SELECT Proveedor.Nombre AS NombreProv,Marca.Nombre AS NombreMarca,Marca.Activo FROM Proveedor JOIN ProveedorMarca ON fk_Proveedor=idProveedor join Marca on fk_Marca=idMarca")
+            listarMarca = cursor.execute("SELECT Proveedor.Nombre AS NombreProv,Proveedor.RFC,Proveedor.Email,Proveedor.Observaciones,Proveedor.urlSitioWeb,Proveedor.Fabricante,Proveedor.Activo,Marca.Nombre AS NombreMarca,Marca.Activo FROM Proveedor JOIN ProveedorMarca ON fk_Proveedor=idProveedor JOIN Marca ON fk_Marca=idMarca")
             listarMarca = dictfetchall(cursor)
             return listarMarca
         
@@ -233,7 +233,7 @@ class ListarMarcaXProveedor(Authentication, viewsets.GenericViewSet):
 class ListarSucursalXProveedor(Authentication, viewsets.GenericViewSet):
     def get_queryset(self):
         with connection.cursor() as cursor:
-            listarSucursal = cursor.execute("SELECT Proveedor.Nombre AS NombreProv,SucursalProv.Nombre AS Alias,SucursalProv.Calle,SucursalProv.noInt,SucursalProv.noExt,SucursalProv.Colonia,CP.cp,MunDeleg.Nombre AS Municipio,Estado.Nombre AS Estado,Pais.Nombre AS Pais FROM Proveedor join SucursalProv ON fk_Proveedor=idProveedor JOIN CP ON fk_CP=cp JOIN MunDeleg ON fk_MpioDel=idMunDeleg JOIN Estado ON fk_Estado=idEstado JOIN Pais ON fk_Pais=idPais")
+            listarSucursal = cursor.execute("SELECT Proveedor.Nombre,Proveedor.RFC,Proveedor.Email,Proveedor.Observaciones,Proveedor.urlSitioWeb,Proveedor.Fabricante,Proveedor.Activo,SucursalProv.Alias,SucursalProv.numTel,SucursalProv.contactoAten,SucursalProv.nomSuperior, SucursalProv.cargoSuperior,SucursalProv.Calle,SucursalProv.noInt,SucursalProv.noExt,SucursalProv.Colonia,CP.cp AS CP,MunDeleg.Nombre AS Municipio,Estado.Nombre AS Estado,Pais.Nombre AS Pais FROM Proveedor JOIN SucursalProv ON fk_Proveedor=idProveedor JOIN CP ON fk_CP=cp JOIN MunDeleg ON fk_MunDeleg=idMunDeleg JOIN Estado ON fk_Estado=idEstado JOIN Pais ON fk_Pais=idPais")
             listarSucursal = dictfetchall(cursor)
             return listarSucursal
         
