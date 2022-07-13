@@ -23,6 +23,7 @@ class OMC41Nivel1(models.Model):
     descriSpa = models.CharField(max_length=25, blank= True, null= True)
     definicionEng = models.CharField(max_length=150, null= False)
     definicionSpa = models.CharField(max_length=150, null= False)
+    anioReg = models.IntegerField(null=False)
 
     def __str__(self):
         return f'{self.Codigo}: {self.descriSpa}'
