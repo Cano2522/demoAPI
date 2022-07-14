@@ -1,7 +1,7 @@
 from tkinter.tix import Balloon
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
-from simple_history.models import HistoricalRecords
+# from simple_history.models import HistoricalRecords
 from DATOSGEOGRAFICOS.models import CP
 # Create your models here.
 
@@ -44,7 +44,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     # Estatus = models.BooleanField(default=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
-    historical = HistoricalRecords()
+    # historical = HistoricalRecords()
     objects = UserManager()
 
     class Meta:
