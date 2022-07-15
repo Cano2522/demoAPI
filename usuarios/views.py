@@ -29,7 +29,7 @@ class Login(ObtainAuthToken):
             user = login_serializer.validated_data['user']
             if user.is_active:
                 token,created = Token.objects.get_or_create(user = user)
-                user.las_login = datetime.now()
+                user.last_login = datetime.now()
                 user.save()
                 user_serializer = UserTokenSerializer(user)
                 if created:
