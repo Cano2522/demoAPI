@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure--pchace+rj2%mvla5wh9qwo)@22cuwb$ihrlhrb3!xxolpy=b*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -108,11 +108,11 @@ WSGI_APPLICATION = 'MAIN.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'mssql',
-        'NAME': 'ccdatabase1',
-        'USER': 'Adminccgroup',
-        'PASSWORD': '78907ggr9786ccgAEC',
-        'HOST': 'consultingconstructionserv.database.windows.net',  
-        'PORT': '1433',
+        'NAME': 'ccdatabase azure',
+        'USER': 'eduardo',
+        'PASSWORD': 'admin1',
+        'HOST': '',  
+        'PORT': '',
 
         'OPTIONS': {
             'driver': 'ODBC Driver 17 for SQL Server', #SQL Server Native Client 11.0
@@ -173,6 +173,9 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = BASE_DIR / 'media'
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
