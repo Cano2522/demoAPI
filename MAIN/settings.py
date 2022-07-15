@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure--pchace+rj2%mvla5wh9qwo)@22cuwb$ihrlhrb3!xxolpy=b*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -115,7 +115,7 @@ DATABASES = {
         'PORT': '1433',
 
         'OPTIONS': {
-            'driver': 'SQL Server Native Client 11.0',
+            'driver': 'ODBC Driver 17 for SQL Server', #SQL Server Native Client 11.0
         },
     }
 }
